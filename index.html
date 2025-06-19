@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flip Stopwatch</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="mainBody" class="theme-default">
+  <div class="theme-switcher">
+    <button onclick="changeTheme('default')">🪐 Default</button>
+    <button onclick="changeTheme('stars')">🌌 Stars</button>
+    <button onclick="changeTheme('cyber')">💠 Cyber</button>
+  </div>
+
+  <div class="container">
+    <div class="flip-clock">
+      <div class="digit" id="minTens">00</div>
+      <div class="digit" id="minUnits">00</div>
+      <div class="colon">:</div>
+      <div class="digit" id="secTens">00</div>
+      <div class="digit" id="secUnits">00</div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">▶ Start</button>
+      <button id="lapBtn">🏁 Lap</button>
+      <button id="resetBtn">⭮ Reset</button>
+    </div>
+
+    <div class="laps">
+      <h2>Laps</h2>
+      <ul id="lapList"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

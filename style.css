@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  overflow-x: hidden;
+  transition: background 1s ease;
+}
+
+.container {
+  text-align: center;
+  padding-top: 100px;
+  z-index: 1;
+  position: relative;
+}
+
+/* ===== THEMES ===== */
+
+.theme-default {
+  background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+}
+
+.theme-stars {
+  background: #000;
+  background-image: radial-gradient(white 1px, transparent 1px),
+                    radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+  animation: starsMove 20s linear infinite;
+}
+
+@keyframes starsMove {
+  from { background-position: 0 0, 25px 25px; }
+  to { background-position: 1000px 1000px, 1025px 1025px; }
+}
+
+.theme-cyber {
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+  background-size: 400% 400%;
+  animation: cyberMove 10s ease infinite;
+}
+
+@keyframes cyberMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* ===== Clock UI ===== */
+
+.flip-clock {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.digit {
+  position: relative;
+  width: 70px;
+  height: 100px;
+  background: #111;
+  color: #0ff;
+  font-size: 48px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.digit::before, .digit::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 1;
+}
+
+.digit::before {
+  top: 0;
+  border-bottom: 1px solid #0ff;
+}
+
+.digit::after {
+  bottom: 0;
+  border-top: 1px solid #0ff;
+}
+
+.colon {
+  font-size: 50px;
+  color: #0ff;
+}
+
+/* ===== Buttons ===== */
+
+.controls button {
+  background: #00f0ff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  margin: 0 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00f0ff;
+  transition: transform 0.2s;
+}
+
+.controls button:hover {
+  transform: scale(1.1);
+}
+
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 99;
+}
+
+.theme-switcher button {
+  margin: 4px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  background: #fff;
+  color: #111;
+  transition: background 0.3s;
+}
+
+.theme-switcher button:hover {
+  background: #ccc;
+}
+
+/* ===== Laps ===== */
+
+.laps {
+  max-height: 200px;
+  overflow-y: auto;
+  color: #0ff;
+  padding: 10px;
+}
+
+.laps ul {
+  list-style: none;
+  padding: 0;
+}
+
+.laps h2 {
+  color: #fff;
+}
