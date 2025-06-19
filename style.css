@@ -14,19 +14,41 @@ body {
   position: relative;
 }
 
-/* ===== THEMES ===== */
-
 .theme-default {
-  background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+  background: radial-gradient(circle at center, pink, powderblue, grey);
+  animation: softPulse 8s ease-in-out infinite;
+}
+
+@keyframes softPulse {
+  0%, 100% {
+    background: radial-gradient(circle at center, pink, powderblue, grey);
+  }
+  50% {
+    background: radial-gradient(circle at center, pink, lightblue, white);
+  }
 }
 
 .theme-stars {
-  background: #000;
-  background-image: radial-gradient(white 1px, transparent 1px),
-                    radial-gradient(white 1px, transparent 1px);
+  background: powderblue;
+  background-image: radial-gradient(green 1px, transparent 1px),
+                    radial-gradient(pink 1px, transparent 1px);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
   animation: starsMove 20s linear infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-stars::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: starDrift 60s linear infinite;
+  opacity: 0.4;
+  z-index: 0;
 }
 
 @keyframes starsMove {
@@ -34,19 +56,46 @@ body {
   to { background-position: 1000px 1000px, 1025px 1025px; }
 }
 
+@keyframes starDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100px, -200px); }
+}
+
 .theme-cyber {
-  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(-45deg, red, orange, darkblue);
   background-size: 400% 400%;
   animation: cyberMove 10s ease infinite;
+  position: relative;
+  overflow: hidden;
 }
 
 @keyframes cyberMove {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* ===== Clock UI ===== */
+.theme-cyber::before {
+  content: "010101001010101011010101";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #0f0;
+  opacity: 0.1;
+  font-size: 80px;
+  line-height: 1.2;
+  overflow: hidden;
+  animation: matrixRain 10s linear infinite;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+@keyframes matrixRain {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
 
 .flip-clock {
   display: flex;
@@ -70,6 +119,16 @@ body {
   justify-content: center;
   overflow: hidden;
   transition: all 0.3s ease;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #0ff;
+  }
+  50% {
+    box-shadow: 0 0 30px #0ff;
+  }
 }
 
 .digit::before, .digit::after {
@@ -91,12 +150,20 @@ body {
   border-top: 1px solid #0ff;
 }
 
+.digit.flip {
+  animation: flipDigit 0.5s ease-in-out;
+}
+
+@keyframes flipDigit {
+  0% { transform: rotateX(0deg); }
+  50% { transform: rotateX(90deg); opacity: 0.5; }
+  100% { transform: rotateX(0deg); opacity: 1; }
+}
+
 .colon {
   font-size: 50px;
   color: #0ff;
 }
-
-/* ===== Buttons ===== */
 
 .controls button {
   background: #00f0ff;
@@ -109,10 +176,32 @@ body {
   font-weight: bold;
   box-shadow: 0 0 10px #00f0ff;
   transition: transform 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
 .controls button:hover {
   transform: scale(1.1);
+}
+
+.controls button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.5), rgba(255,255,255,0));
+  transform: skewX(-25deg);
+}
+
+.controls button:hover::after {
+  animation: shineSwipe 1s ease forwards;
+}
+
+@keyframes shineSwipe {
+  0% { left: -75%; }
+  100% { left: 125%; }
 }
 
 .theme-switcher {
