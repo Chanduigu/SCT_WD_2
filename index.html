@@ -3,37 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flip Stopwatch</title>
+  <title>Smart Stopwatch Dashboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body id="mainBody" class="theme-default">
+<body class="theme-default">
+  <header>⏱ Smart Stopwatch Dashboard</header>
+
   <div class="theme-switcher">
-    <button onclick="changeTheme('default')">🪐 Default</button>
-    <button onclick="changeTheme('stars')">🌌 Stars</button>
-    <button onclick="changeTheme('cyber')">💠 Cyber</button>
+    <button onclick="setTheme('default')">Default</button>
+    <button onclick="setTheme('stars')">Stars</button>
+    <button onclick="setTheme('cyber')">Cyber</button>
   </div>
 
-  <div class="container">
+  <nav>
+    <button onclick="showSection('stopwatch')">Stopwatch</button>
+    <button onclick="showSection('dashboard')">Dashboard</button>
+  </nav>
+
+  <section id="stopwatch" class="section active">
+    <div class="task-entry">
+      <input type="text" id="taskInput" placeholder="Enter Task Name" />
+    </div>
+    <div class="lap-config">
+      <input type="number" id="lapIntervalInput" placeholder="Auto-lap after (sec)" min="1" value="5">
+    </div>
     <div class="flip-clock">
-      <div class="digit" id="minTens">00</div>
-      <div class="digit" id="minUnits">00</div>
+      <div class="digit" id="min">00</div>
       <div class="colon">:</div>
-      <div class="digit" id="secTens">00</div>
-      <div class="digit" id="secUnits">00</div>
+      <div class="digit" id="sec">00</div>
     </div>
-
     <div class="controls">
-      <button id="startBtn">▶ Start</button>
-      <button id="lapBtn">🏁 Lap</button>
-      <button id="resetBtn">⭮ Reset</button>
+      <button onclick="startTimer()">Start</button>
+      <button onclick="stopTimer()">Stop</button>
+      <button onclick="resetTimer()">Reset</button>
+      <button onclick="recordLap()">Lap</button>
     </div>
-
     <div class="laps">
-      <h2>Laps</h2>
+      <h3>Laps</h3>
       <ul id="lapList"></ul>
     </div>
-  </div>
+  </section>
 
+  <section id="dashboard" class="section">
+    <div class="dashboard">
+      <h2>Task Performance Chart</h2>
+      <button class="show-graph-btn" onclick="renderDashboard()">Show Graph</button>
+      <button class="show-graph-btn" onclick="clearAllData()">Clear All Data</button>
+      <canvas id="taskChart" width="600" height="300"></canvas>
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody id="taskTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
